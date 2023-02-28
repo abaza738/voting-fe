@@ -2,8 +2,10 @@
 import { onMounted, onUnmounted, reactive, ref } from 'vue';
 import words from 'random-words';
 import { useRouter } from 'vue-router';
+import { useSession } from '@/stores/session.store';
 
 const router = useRouter();
+const session = useSession();
 const data = ['projects!', 'users!', 'votes!'];
 let index = 0;
 let interval: number;
@@ -12,7 +14,6 @@ const transitionState = reactive({
   'fade-out': false,
   'fade-in': true,
 });
-const username = ref(localStorage.getItem('username'));
 const option = ref();
 
 onMounted(() => {
@@ -40,7 +41,6 @@ function generateSessionId() {
 
 function createVote() {
   const sessionId = generateSessionId();
-  console.log(sessionId);
   localStorage.setItem('sessionId', sessionId);
   router.push({ path: `vote/${sessionId}` });
 }
@@ -60,7 +60,7 @@ function joinVote() {
     <img src="/makane-en.svg" alt="makane-en">
   </div>
 
-  <h6 class="welcome">Welcome {{ username }}!</h6>
+  <h6 class="welcome">Welcome there!</h6>
 
   <h1>Vote with Vite</h1>
 
@@ -68,13 +68,19 @@ function joinVote() {
 
   <div class="buttons">
     <div class="top">
-      <button @click="createVote" class="primary"><fa icon="fa-solid fa-plus" /> Create Vote</button>
+      <button v-if="session.isAuthenticated" @click="createVote" class="primary"><fa icon="fa-solid fa-plus" /> Create Vote</button>
+      <RouterLink v-else to="/register">
+        <button class="primary"><fa icon="fa-solid fa-plus" /> Register</button>
+      </RouterLink>
     </div>
 
     <div class="divider"></div>
 
     <div class="bottom">
-      <button @click="joinVote"><fa icon="fa-solid fa-circle-user" /> Join Vote</button>
+      <button v-if="session.isAuthenticated" @click="joinVote"><fa icon="fa-solid fa-circle-user" /> Join Vote</button>
+      <RouterLink v-else to="/login">
+        <button><fa icon="fa-solid fa-right-to-bracket" /> Login</button>
+      </RouterLink>
     </div>
   </div>
 </div>

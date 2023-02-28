@@ -1,17 +1,14 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
 import Nav from "./components/Nav.vue";
+import { useSession } from "./stores/session.store";
 import { onMounted } from "vue";
 
 onMounted(() => {
-  if (!localStorage.getItem('username')) {
-    let username;
-    while(!username) {
-      username = window.prompt('Enter yer name please!');
-    }
-    localStorage.setItem('username', username);
-  }
+  const session = useSession();
+  session.me();
 });
+
 </script>
 
 <template>

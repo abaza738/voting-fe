@@ -6,8 +6,7 @@ import type { Session } from "../types"
 const listOfSessions: Ref<Session[]> = ref([]);
 
 function getSessions() {
-    const url = new URL('sessions', import.meta.env.VITE_API_URL).href;
-    axios.get(url).then(sessions => {
+    axios.get('/sessions').then(sessions => {
         listOfSessions.value = sessions.data;
     });
 }

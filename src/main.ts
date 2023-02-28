@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
+import "./axios";
 
 import App from "./App.vue";
 import router from "./router";
@@ -12,14 +13,16 @@ import "./assets/main.css";
 import {
     faCircleUser,
     faHouse,
+    faUserCircle,
     faPlus,
     faRightToBracket,
-    faSquarePollVertical
+    faSquarePollVertical,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(...[
     faCircleUser,
     faHouse,
+    faUserCircle,
     faPlus,
     faRightToBracket,
     faSquarePollVertical,
