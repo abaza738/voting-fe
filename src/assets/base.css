@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Viga&display=swap');
+
+:root {
+  --primary: #4f469c;
+  --primary-hover: #48408e;
+  --primary-active: #3a3473;
+  --secondary: #ea5d76;
+  --secondary-hover: #e84c67;
+  --secondary-active: #e53a59;
+  --tertiary: #9bc9b0;
+  --backup: #f1a366;
+  --link: #31a8ee;
+  --link-hover: #1fa0ed;
+  --link-active: #1397e5;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  position: relative;
+  font-weight: normal;
+}
+
+body {
+  height: 100vh;
+  transition: 300ms;
+  line-height: 1.2;
+  font-family: 'Viga', sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #303030;
+}
+
+h1 {
+  font-size: 5rem;
+}
+
+h2 {
+  font-size: 4rem;
+}
+
+h3 {
+  font-size: 3rem;
+}
+
+h4 {
+  font-size: 2rem;
+}
+
+h5 {
+  font-size: 1.5rem;
+}
+
+h6 {
+  font-size: 1.25rem;
+}
+
+a {
+  text-decoration: none;
+  color: var(--link);
+  transition: 300ms;
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+a:active {
+  color: var(--link-active);
+}
+
+button {
+  cursor: pointer;
+  font-family: 'Viga';
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 1rem 0.25rem 1rem 0.25rem;
+  background-color: #f0f0f0;
+  color: #303030;
+  transition: 300ms;
+}
+
+button:hover {
+  background-color: #eaeaea;
+}
+
+button:active {
+  background-color: #e0e0e0;
+}
+
+button.primary {
+  color: white;
+  background-color: var(--primary);
+}
+
+button.primary:hover {
+  background-color: var(--primary-hover);
+}
+
+button.primary:active {
+  background-color: var(--primary-active);
+}
+
+button.secondary {
+  color: white;
+  background-color: var(--secondary);
+}
+
+button.secondary:hover {
+  background-color: var(--secondary-hover);
+}
+
+button.secondary:active {
+  background-color: var(--secondary-active);
+}
+
+input[type=text],
+input[type=email],
+input[type=password],
+input[type=search],
+input[type=url] {
+  border: none;
+  outline: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-family: 'Viga';
+  background-color: #f0f0f0;
+  border: 0.25rem solid #f0f0f0;
+  color: #303030;
+  border-radius: 1rem 0.25rem 1rem 0.25rem;
+  transition: 300ms;
+}
+
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=password]:focus,
+input[type=search]:focus,
+input[type=url]:focus {
+  background-color: white;
+  color: #303030;
+}
