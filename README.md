@@ -44,3 +44,9 @@ npm run build
 ```sh
 npm run lint
 ```
+
+## Required Env Variables
+
+|Key|Description|
+|:--|:--|
+|`VITE_API_URL`|Base URL of the backend server|
