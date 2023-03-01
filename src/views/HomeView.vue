@@ -1,15 +1,22 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, reactive, ref } from 'vue';
-import words from 'random-words';
-import { useRouter } from 'vue-router';
 import { useSession } from '@/stores/session.store';
+import axios from 'axios';
 import party from "party-js";
+import words from 'random-words';
+import { onMounted, onUnmounted, reactive, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const session = useSession();
+
 const data = ['projects!', 'users!', 'votes!'];
 let index = 0;
 let interval: number;
+
+const snackbar = reactive({
+  show: false,
+  text: '',
+});
 
 const transitionState = reactive({
   'fade-out': false,
@@ -33,23 +40,23 @@ function switchOptions() {
   }, 550);
 }
 
-function generateSessionId() {
+function generateSessionName() {
   const timeSeed = Date.now();
   const randomWord = words({ exactly: 1, seed: `${timeSeed}` });
-  const newSessionId = `${randomWord[0]}-${timeSeed}`;
-  return newSessionId;
+  const newSessionName = `${randomWord[0]}-${timeSeed}`;
+  return newSessionName;
 }
 
-function createVote() {
-  const sessionId = generateSessionId();
-  localStorage.setItem('sessionId', sessionId);
-  router.push({ path: `vote/${sessionId}` });
+async function createSession() {
+  const sessionName = generateSessionName();
+  const newSession = await axios.post('/sessions', { name: sessionName });
+  snackbar.show = true;
+  snackbar.text = newSession.data.name;
+  // router.push({ path: `vote/${sessionId}` });
 }
 
 function joinVote() {
   const sessionId = window.prompt('Ye want this, laddy?');
-  console.log(sessionId);
-  router.push({ path: `vote/${sessionId}` });
 }
 
 function partaaaaay(e: any) {
@@ -73,7 +80,7 @@ function partaaaaay(e: any) {
 
   <div class="buttons">
     <div class="top">
-      <button v-if="session.isAuthenticated" @click="createVote" class="primary"><fa icon="fa-solid fa-plus" /> Create Vote</button>
+      <button v-if="session.isAuthenticated" @click="createSession" class="primary"><fa icon="fa-solid fa-plus" /> New Session</button>
       <RouterLink v-else to="/register">
         <button class="primary"><fa icon="fa-solid fa-plus" /> Register</button>
       </RouterLink>
@@ -88,6 +95,9 @@ function partaaaaay(e: any) {
       </RouterLink>
     </div>
   </div>
+  <v-snackbar v-model="snackbar.show" color="success" variant="flat">
+    <v-icon icon="checkmark"></v-icon> Session <code>{{ snackbar.text }}</code> created successfully!
+  </v-snackbar>
 </div>
 </template>
 

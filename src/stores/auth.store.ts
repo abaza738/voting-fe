@@ -24,11 +24,7 @@ export const useAuth = defineStore('auth', () => {
     };
 
     const register = (form: IRegisterParams) => {
-        axios.post('/auth/register', form).then(response => {
-            if (response.status === 200) {
-                router.push('/login');
-            }
-        }).catch(console.log);
+        return axios.post('/auth/register', form);
     };
 
     const me = () => {

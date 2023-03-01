@@ -127,6 +127,23 @@ button:disabled {
   opacity: 0.5;
 }
 
+code {
+  font-family: 'JetBrains Mono', monospace;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+  background-color: rgb(31, 29, 43);
+  color: rgb(255, 251, 196);
+  transition: 300ms;
+}
+
+code:hover {
+  background-color: rgb(51, 49, 73);
+}
+
+code:active {
+  background-color: rgb(66, 61, 97);
+}
+
 input[type=text],
 input[type=email],
 input[type=password],
