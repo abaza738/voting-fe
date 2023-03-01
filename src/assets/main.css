@@ -3,3 +3,26 @@
 #app {
     height: 100%;
 }
+
+.loopity-loop {
+    animation: shagleb 2s alternate 1;
+    transition: 500ms;
+}
+
+@keyframes shagleb {
+    from {
+        transform: scale(100%) rotate(0deg);
+    }
+    25% {
+        transform: scale(150%) rotate(90deg);
+    }
+    50% {
+        transform: scale(200%) rotate(180deg);
+    }
+    75% {
+        transform: scale(150%) rotate(270deg);
+    }
+    to {
+        transform: scale(100%) rotate(360deg);
+    }
+}

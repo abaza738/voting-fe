@@ -120,6 +120,13 @@ button.secondary:active {
   background-color: var(--secondary-active);
 }
 
+
+button:disabled {
+  cursor: default;
+  /* color: grey; */
+  opacity: 0.5;
+}
+
 input[type=text],
 input[type=email],
 input[type=password],

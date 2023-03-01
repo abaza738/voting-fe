@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useSession } from "./stores/session.store";
 
 // axios.defaults.withCredentials = true;
 
@@ -8,3 +9,14 @@ if (!baseURL) {
 }
 
 axios.defaults.baseURL = baseURL;
+
+axios.interceptors.request.use(request => {
+    const session = useSession();
+    const token = session.getToken();
+
+    if (token) {
+        request.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return request;
+});

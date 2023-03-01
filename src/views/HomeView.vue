@@ -3,6 +3,7 @@ import { onMounted, onUnmounted, reactive, ref } from 'vue';
 import words from 'random-words';
 import { useRouter } from 'vue-router';
 import { useSession } from '@/stores/session.store';
+import party from "party-js";
 
 const router = useRouter();
 const session = useSession();
@@ -50,17 +51,21 @@ function joinVote() {
   console.log(sessionId);
   router.push({ path: `vote/${sessionId}` });
 }
+
+function partaaaaay(e: any) {
+  party.confetti(e.target, { spread: 500 })
+}
 </script>
 
 <template>
   <div class="home">
 
-  <div class="logo">
+  <div class="logo" @click="partaaaaay">
     <img src="/makane-ar.svg" alt="makane-ar">
     <img src="/makane-en.svg" alt="makane-en">
   </div>
 
-  <h6 class="welcome">Welcome there!</h6>
+  <h6 class="welcome">Welcome <span v-if="session.isAuthenticated">{{ session.currentUser?.firstName }}</span><span v-else>there</span>!</h6>
 
   <h1>Vote with Vite</h1>
 
@@ -94,6 +99,7 @@ function joinVote() {
   justify-content: center;
   height: 100%;
   background: url('./bg.jpg') center no-repeat;
+  background-size: cover;
 }
 
 img {

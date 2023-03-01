@@ -6,7 +6,7 @@ const route = useRoute();
 
 <template>
 <div class="auth-wrapper">
-    <div class="section">
+    <div class="section splash">
         <h2>{{ route.meta.title }}</h2>
     </div>
     <div class="section">
@@ -27,5 +27,11 @@ const route = useRoute();
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.splash {
+    background-color: var(--primary);
+    color: white;
+    border-radius: 0.5rem;
 }
 </style>

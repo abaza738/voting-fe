@@ -1,3 +1,10 @@
+export interface IUser {
+    id: string;
+    username: string;
+    firstName: string;
+    lastName: string;
+}
+
 export type Session = {
     id: number,
     name: string,
