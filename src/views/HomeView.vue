@@ -2,6 +2,7 @@
 import { useSession } from '@/stores/session.store';
 import axios from 'axios';
 import party from "party-js";
+import type { DynamicSourceType } from 'party-js/lib/systems/sources';
 import words from 'random-words';
 import { onMounted, onUnmounted, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -23,6 +24,11 @@ const transitionState = reactive({
   'fade-in': true,
 });
 const option = ref();
+
+const position = reactive({
+  x: '0px',
+  y: '0px',
+});
 
 onMounted(() => {
   interval = setInterval(switchOptions, 3e3);
@@ -55,13 +61,20 @@ async function createSession() {
   // router.push({ path: `vote/${sessionId}` });
 }
 
-function joinVote() {
-  const sessionId = window.prompt('Ye want this, laddy?');
+function joinVote(e: MouseEvent) {
+  e.preventDefault();
+  party.confetti(e.target as DynamicSourceType);
 }
 
 function partaaaaay(e: any) {
   party.confetti(e.target, { spread: 500 })
 }
+
+function moveButton() {
+  position.x = `${Math.round(Math.random() * 150)}px`;
+  position.y = `${Math.round(Math.random() * 150)}px`;
+}
+
 </script>
 
 <template>
@@ -89,7 +102,9 @@ function partaaaaay(e: any) {
     <div class="divider"></div>
 
     <div class="bottom">
-      <button v-if="session.isAuthenticated" @click="joinVote"><fa icon="fa-solid fa-circle-user" /> Join Vote</button>
+      <button v-if="session.isAuthenticated" @click="moveButton" v-bind:style="{transform: `translate(${position.x}, ${position.y})`}"  @contextmenu="joinVote">
+        <fa icon="fa-solid fa-circle-user" /> Join Vote
+      </button>
       <RouterLink v-else to="/login">
         <button><fa icon="fa-solid fa-right-to-bracket" /> Login</button>
       </RouterLink>
